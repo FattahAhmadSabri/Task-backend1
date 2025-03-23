@@ -1,6 +1,7 @@
 const express= require("express");
 const cors = require("cors")
 const productRoutes = require("./Routes/productRoutes")
+const authRoutes = require("./Routes/authRoutes")
 const dotenv = require("dotenv")
 
 const {connectDB} = require("./Config/db")
@@ -21,6 +22,7 @@ app.get("/", (req,res)=>{
 })
 // app.use("/uploads", express.static("uploads"));
 app.use("/api/products",productRoutes)
+app.use("/api/auth",authRoutes );
 app.listen(port, ()=>{
     connectDB()
     console.log(`server running at ${port}`)
