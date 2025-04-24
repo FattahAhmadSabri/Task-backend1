@@ -1,5 +1,7 @@
 const express= require("express");
 const cors = require("cors")
+const helmet = require("helmet")
+const compression = require("compression")
 const productRoutes = require("./Routes/productRoutes")
 const authRoutes = require("./Routes/authRoutes")
 const dotenv = require("dotenv")
@@ -9,6 +11,8 @@ dotenv.config();
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(helmet())
+app.use(compression())
 
 const port = process.env.PORT || 4000
 
