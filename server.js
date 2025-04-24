@@ -1,6 +1,7 @@
 const express= require("express");
 const cors = require("cors")
 const morgan = require("morgan")
+const responseTime  = require("response-time")
 const helmet = require("helmet")
 const compression = require("compression")
 const productRoutes = require("./Routes/productRoutes")
@@ -14,7 +15,9 @@ app.use(cors())
 app.use(express.json())
 app.use(helmet())
 app.use(compression());
-app.use(morgan("combined"))
+app.use(responseTime())
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
 
 const port = process.env.PORT || 4000
 
