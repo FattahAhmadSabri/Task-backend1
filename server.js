@@ -20,7 +20,7 @@ app.use(responseTime())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 const limiter= rateLimit({
-    windowMs : 10*61*1000,
+    windowMs : 5*60*1000,
     max : 15,
     message : "To many request from this IP, please try afer some time"
 })
