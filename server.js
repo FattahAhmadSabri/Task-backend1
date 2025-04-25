@@ -3,6 +3,7 @@ const cors = require("cors")
 const morgan = require("morgan")
 const responseTime  = require("response-time")
 const helmet = require("helmet")
+const rateLimit = require("express-rate-limit")
 const compression = require("compression")
 const productRoutes = require("./Routes/productRoutes")
 const authRoutes = require("./Routes/authRoutes")
@@ -17,6 +18,13 @@ app.use(helmet())
 app.use(compression());
 app.use(responseTime())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
+const limiter= rateLimit({
+    windowMs : 10*61*1000,
+    max : 15,
+    message : "To many request from this IP, please try afer some time"
+})
+app.use(limiter)
 
 
 const port = process.env.PORT || 4000
